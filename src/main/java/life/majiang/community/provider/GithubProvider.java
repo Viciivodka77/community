@@ -19,22 +19,26 @@ public class GithubProvider {
 
         RequestBody body = RequestBody.create(mediaType,JSON.toJSONString(accessTokenDTO));
         Request request = new Request.Builder()
-                .url("https://github.com/login/oauth/access_token?client_id=a745ccb34a925b0b435b&client_secret=24f7bbb0048c887ad2285d199bed68805b5fa0a6&code="
-                        +accessTokenDTO.getCode()
-                        +"&redirect_uri=http://localhost:8887/callback&state=1")
+                .url("https://github.com/login/oauth/access_token")
                 .post(body)
-                .build();
+                .build()
+                ;
+
+        System.setProperty("javax.net.ssl.trustStore", "/erp/test/apps/apps_st/comn/java/classes/com/zshare/jssecacerts");
+
         try (Response response = client.newCall(request).execute()) {
             String string = response.body().string();
-            System.out.println(string);
-
-            return string;
-        } catch (IOException e) {
+            String token  = string.split("&")[0].split("=")[1];
+            return token;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
 
-    public GithubUser getGithubUser(String accessToken){
+    public GithubUser getGithubUser(String accessToken,AccessTokenDTO accessTokenDTO){
+
+        System.setProperty("javax.net.ssl.trustStore", "/erp/test/apps/apps_st/comn/java/classes/com/zshare/jssecacerts");
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url("https://api.github.com/user?access_token=" + accessToken)
@@ -42,10 +46,11 @@ public class GithubProvider {
 
         try {
             Response response = client.newCall(request).execute();
+            System.out.println(response.body().string());
             String string = response.body().string();
             GithubUser githubUser = JSON.parseObject(string, GithubUser.class);
             return githubUser;
-        } catch (IOException e) {
+        } catch (Exception e) {
         }
         return null;
     }
