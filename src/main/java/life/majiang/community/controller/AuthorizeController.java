@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+
 @Controller
 public class AuthorizeController {
 
@@ -16,7 +19,7 @@ public class AuthorizeController {
 
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code") String code ,
-                           @RequestParam(name = "state") String state){
+                           @RequestParam(name = "state") String state) throws NoSuchAlgorithmException, KeyManagementException {
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setCode(code);
         accessTokenDTO.setClient_secret("24f7bbb0048c887ad2285d199bed68805b5fa0a6");
