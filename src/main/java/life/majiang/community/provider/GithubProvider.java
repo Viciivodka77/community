@@ -20,7 +20,9 @@ public class GithubProvider {
     public String getAccessToken(AccessTokenDTO accessTokenDTO) throws KeyManagementException, NoSuchAlgorithmException {
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
 
-        OkHttpClient client = getUnsafeOkHttpClient();
+        OkHttpClient client = getUnsafeOkHttpClient().newBuilder().connectTimeout(50000, TimeUnit.MILLISECONDS)
+                .readTimeout(50000, TimeUnit.MILLISECONDS)
+                .build();
 
         RequestBody body = RequestBody.create(mediaType,JSON.toJSONString(accessTokenDTO));
         Request request = new Request.Builder()
@@ -45,7 +47,7 @@ public class GithubProvider {
 //        System.setProperty("javax.net.ssl.trustStore", "/erp/test/apps/apps_st/comn/java/classes/com/zshare/jssecacerts");
         OkHttpClient client = getUnsafeOkHttpClient().newBuilder().connectTimeout(50000, TimeUnit.MILLISECONDS)
                 .readTimeout(50000, TimeUnit.MILLISECONDS)
-                .build();;
+                .build();
         Request request = new Request.Builder()
                 .url("https://api.github.com/user?access_token=" + accessToken)
                 .build();
