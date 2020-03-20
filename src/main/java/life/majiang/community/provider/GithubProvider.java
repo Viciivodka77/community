@@ -28,12 +28,9 @@ public class GithubProvider {
         Request request = new Request.Builder()
                 .url("https://github.com/login/oauth/access_token")
                 .post(body)
-                .build()
-                ;
-//        System.setProperty("javax.net.ssl.trustStore", "/erp/test/apps/apps_st/comn/java/classes/com/zshare/jssecacerts");
+                .build();
         try (Response response = client.newCall(request).execute()) {
             String string = response.body().string();
-            System.out.println(string);
             String token  = string.split("&")[0].split("=")[1];
             return token;
         } catch (Exception e) {
@@ -44,21 +41,19 @@ public class GithubProvider {
 
     public GithubUser getGithubUser(String accessToken,AccessTokenDTO accessTokenDTO) throws KeyManagementException, NoSuchAlgorithmException {
 
-//        System.setProperty("javax.net.ssl.trustStore", "/erp/test/apps/apps_st/comn/java/classes/com/zshare/jssecacerts");
         OkHttpClient client = getUnsafeOkHttpClient().newBuilder().connectTimeout(50000, TimeUnit.MILLISECONDS)
                 .readTimeout(50000, TimeUnit.MILLISECONDS)
                 .build();
         Request request = new Request.Builder()
                 .url("https://api.github.com/user?access_token=" + accessToken)
                 .build();
-
         try {
             Response response = client.newCall(request).execute();
             String string = response.body().string();
             GithubUser githubUser = JSON.parseObject(string, GithubUser.class);
             return githubUser;
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
         return null;
     }
