@@ -1,7 +1,19 @@
-#github配置文件
+#github授权配置文件
 github:
   client:
     id: a745ccb34a925b0b435b
     secret: 24f7bbb0048c887ad2285d199bed68805b5fa0a6
   redirect:
     uri: http://localhost:8888/callback
+
+#数据库
+spring:
+  datasource:
+    username: root
+    password: 123
+    url: jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  type-aliases-package: life.majiang.community.model
+  mapper-locations: classpath:mybatis/mapper/*.xml

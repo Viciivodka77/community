@@ -32,3 +32,21 @@ OkHttpClient client = getUnsafeOkHttpClient()
 
 
 ##工具
+
+
+##脚本
+```sql
+CREATE DATABASE `community` /*!40100 DEFAULT CHARACTER SET utf8 */
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account_id` varchar(100) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `token` varchar(36) DEFAULT NULL,
+  `gmt_create` bigint(20) DEFAULT NULL,
+  `gmt_modified` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
+
+
+```
