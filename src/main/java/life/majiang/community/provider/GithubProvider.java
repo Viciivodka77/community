@@ -53,7 +53,7 @@ public class GithubProvider {
             GithubUser githubUser = JSON.parseObject(string, GithubUser.class);
             return githubUser;
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return null;
     }

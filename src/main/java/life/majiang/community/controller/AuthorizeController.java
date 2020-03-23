@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
@@ -37,7 +39,8 @@ public class AuthorizeController {
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code") String code ,
                            @RequestParam(name = "state") String state,
-                           HttpServletRequest request) throws NoSuchAlgorithmException, KeyManagementException {
+                           HttpServletRequest request,
+                           HttpServletResponse response) throws NoSuchAlgorithmException, KeyManagementException {
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setCode(code);
         accessTokenDTO.setClient_secret(clientSecret);
@@ -49,17 +52,21 @@ public class AuthorizeController {
         if (githubUser != null){
             //登陆成功，cookie和session
             User user = new User();
-            user.setToken(UUID.randomUUID().toString());
+            String token = UUID.randomUUID().toString();
+            user.setToken(token);
             user.setName(githubUser.getName());
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             userMapper.insert(user);
-            request.getSession().setAttribute("user" , githubUser);
+            System.out.println(user);
+            Cookie cookie = new Cookie("token", token);
+            System.out.println(cookie);
+            response.addCookie(cookie);
             return "redirect:index";
         }else {
             //登陆失败，重新登陆
-            System.out.println("11111111111111111");
+            System.out.println("登陆失败");
             return "redirect:index";
         }
     }

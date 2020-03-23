@@ -8,6 +8,8 @@
         insert into community.user (account_id, name, token, gmt_create, gmt_modified) value (#{accountId}, #{name}, #{token}, #{gmtCreate}, #{gmtModified})
     </insert>
 
-
+    <select id="findByToken" resultType="User">
+        select * from community.user where token = #{token}
+    </select>
 
 </mapper>

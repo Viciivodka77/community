@@ -11,6 +11,8 @@ https://v3.bootcss.com/components/#navbar-default
 
 具体原因未知 判断1：可能重复使用方法没有关闭连接导致异常抛出
 
+更改了httputil类，暂时解决（观望）
+
 ###已解决
 
 okhttp 使用4.x.x 会出现出错误：
