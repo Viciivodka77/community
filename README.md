@@ -34,7 +34,15 @@ OkHttpClient client = getUnsafeOkHttpClient()
 
 
 ##工具
+SpringBoot2.2.5
 
+OkHttp3.14.1
+
+Lombok
+
+Mybatis
+
+Thymeleaf
 
 ##脚本
 ```sql
@@ -47,8 +55,30 @@ CREATE TABLE `user` (
   `token` varchar(36) DEFAULT NULL,
   `gmt_create` bigint(20) DEFAULT NULL,
   `gmt_modified` bigint(20) DEFAULT NULL,
+  `bio` varchar(256) DEFAULT NULL,
+  `avatar_url` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8
+
+
+
+create table question
+(
+	id int auto_increment,
+	title varchar(50) null,
+	description TEXT null,
+	gmt_create bigint null,
+	gmt_modified bigint null,
+	creator int null,
+	comment_count int default 0 null,
+	view_count int default 0 null,
+	like_count int default 0 null,
+	tag varchar(256) null,
+	constraint question_pk
+		primary key (id)
+);
+
+
 
 
 ```
