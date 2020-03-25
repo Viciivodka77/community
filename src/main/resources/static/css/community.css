@@ -5,8 +5,25 @@ body{
     margin: 60px;
     background-color: whitesmoke;
 }
+.indexMain{
+    margin: 27px 20% 30px;
+    background-color: whitesmoke;
+    height: -webkit-fill-available;
+}
+.indexAvatar{
+    border-radius: 4px;
+    width: 45px;
+}
 .publishbtn{
     float: right;
     margin-bottom: 30px;
     margin-right: 15px;
+}
+.text-desc{
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}
+.indexQuestionList{
+    margin: 24px 24px 24px 5px;
 }

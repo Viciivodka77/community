@@ -7,11 +7,44 @@
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css" >
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/community.css">
     <script src="js/bootstrap.min.js" type="application/javascript"></script>
     <script src="js/bootstrap.js" type="application/javascript"></script>
 
 </head>
 <body>
     <div th:insert="common/common.html :: navbar"></div>
+
+    <div class="container-fluid indexMain img-thumbnail">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span>  发现</h2>
+                <hr>
+                <div class="media indexQuestionList" th:each="question : ${questionDTOList}">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object indexAvatar" th:src="${question.getUser().getAvatarUrl()}" />
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading" th:text="${question.getTitle()}"></h4>
+                        <span class="text-desc">•
+                            <span th:text="${question.getUser().getName()}"></span>
+                            发表了文章 •
+                            <span th:text="${question.getCommentCount() == null ? 0 : question.getCommentCount()}"></span>
+                            个回复 •
+                            <span th:text="${question.getViewCount() == null ? 0 : question.getViewCount()}"></span> 次浏览 •
+                            <span th:text="${#dates.format(question.getGmtCreate(),'yyyy年MM月dd日HH时mm分')}"></spant>发布
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <h3>热门话题</h3>
+                <br>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

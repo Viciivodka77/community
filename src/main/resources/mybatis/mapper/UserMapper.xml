@@ -5,11 +5,15 @@
 <mapper namespace="life.majiang.community.mapper.UserMapper">
 
     <insert id="insert" parameterType="User">
-        insert into community.user (account_id, name, token, gmt_create, gmt_modified, avatar_url, bio) value (#{accountId}, #{name}, #{token}, #{gmtCreate}, #{gmtModified}, #{avatarUrl}, #{bio})
+        insert into community.user (accountId, name, token, gmtCreate, gmtModified, avatarUrl, bio) value (#{accountId}, #{name}, #{token}, #{gmtCreate}, #{gmtModified}, #{avatarUrl}, #{bio})
     </insert>
 
     <select id="findByToken" resultType="User">
         select * from community.user where token = #{token}
+    </select>
+
+    <select id="findById" resultType="User">
+        select * from community.user where id = #{id}
     </select>
 
 </mapper>

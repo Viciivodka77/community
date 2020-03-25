@@ -5,7 +5,11 @@
 <mapper namespace="life.majiang.community.mapper.QuestionMapper">
 
     <insert id="create" parameterType="Question">
-        insert into community.question (title, description, gmt_create, gmt_modified, creator, comment_count, view_count, like_count, tag) value (#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{commentCount},#{viewCount},#{likeCount},#{tag})
+        insert into community.question (title, description, gmtCreate, gmtModified, creator, commentCount, viewCount, likeCount, tag) value (#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{commentCount},#{viewCount},#{likeCount},#{tag})
     </insert>
+
+    <select id="selectAllQuestion" resultType="Question">
+        select * from community.question
+    </select>
 
 </mapper>

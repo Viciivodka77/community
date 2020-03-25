@@ -8,7 +8,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
 
+    //添加用户
     void insert(User user);
 
     User findByToken(String token);
+
+    //根据id查询用户
+    User findById(Integer id);
 }
