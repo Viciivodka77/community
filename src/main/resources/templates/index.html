@@ -20,7 +20,7 @@
             <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                 <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span>  发现</h2>
                 <hr>
-                <div class="media indexQuestionList" th:each="question : ${questionDTOList}">
+                <div class="media indexQuestionList" th:each="question : ${paginationDTO.getQuestions()}">
                     <div class="media-left">
                         <a href="#">
                             <img class="media-object indexAvatar" th:src="${question.getUser().getAvatarUrl()}" />
@@ -34,10 +34,37 @@
                             <span th:text="${question.getCommentCount() == null ? 0 : question.getCommentCount()}"></span>
                             个回复 •
                             <span th:text="${question.getViewCount() == null ? 0 : question.getViewCount()}"></span> 次浏览 •
-                            <span th:text="${#dates.format(question.getGmtCreate(),'yyyy年MM月dd日HH时mm分')}"></spant>发布
+                            <span th:text="${#dates.format(question.getGmtCreate(),'yyyy年MM月dd日HH时mm分')}"></span> 发布
                         </span>
                     </div>
                 </div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li th:if="${paginationDTO.isShowFirstPage()}">
+                            <a  aria-label="Previous" th:href="@{/(page = 1)}">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li th:if="${paginationDTO.isShowPrevious()}">
+                            <a th:href="@{/(page = ${paginationDTO.getCurrentPage()} - 1)}">
+                                <span aria-hidden="true">&lsaquo;</span>
+                            </a>
+                        </li>
+
+                        <li th:class="${paginationDTO.currentPage == page ? 'active' : '' }" th:each="page : ${paginationDTO.getPageList()}"><a th:href="@{/(page = ${page})}" th:text="${page}"></a></li>
+
+                        <li th:if="${paginationDTO.isShowNext()}">
+                            <a th:href="@{/(page = ${paginationDTO.getCurrentPage()} + 1)}">
+                                <span aria-hidden="true">&rsaquo;</span>
+                            </a>
+                        </li>
+                        <li th:if="${paginationDTO.isShowEndPage()}">
+                            <a  aria-label="Next" th:href="@{/(page = ${paginationDTO.getTotalPage()})}">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <h3>热门话题</h3>

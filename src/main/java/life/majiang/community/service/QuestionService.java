@@ -1,5 +1,6 @@
 package life.majiang.community.service;
 
+import life.majiang.community.dto.PaginationDTO;
 import life.majiang.community.dto.QuestionDTO;
 import life.majiang.community.mapper.QuestionMapper;
 import life.majiang.community.mapper.UserMapper;
@@ -21,16 +22,40 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
-    public List<QuestionDTO> selectAllQuestion() {
+    public PaginationDTO selectAllQuestion(Integer page, Integer size) {
+        //查询所有值数目
+        Integer totalCount = questionMapper.count();
+        Integer totalPage;
+        //计算分页总数
+        if(totalCount % size == 0){
+            totalPage = totalCount / size;
+        }else {
+            totalPage = totalCount / size + 1;
+        }
+        //处理意外因素
+        if(page < 1){
+            page = 1;
+        }
+        if(page > totalPage){
+            page = totalPage;
+        }
+        //size * (page - 1) 计算数据库查询数值
+        Integer offset = size * (page - 1);
+        List<Question> questions = questionMapper.selectAllQuestion(offset,size);
+
         List<QuestionDTO> questionDTOList = new ArrayList<>();
-        List<Question> questions = questionMapper.selectAllQuestion();
+        PaginationDTO paginationDTO = new PaginationDTO();
         for (Question question : questions) {
             User userById = userMapper.findById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question,questionDTO);
+            //把Question封装到QuestionDTO
             questionDTO.setUser(userById);
             questionDTOList.add(questionDTO);
         }
-        return questionDTOList;
+        //把QuestionDTO封装到paginationDTO
+        paginationDTO.setQuestions(questionDTOList);
+        paginationDTO.setPagination(totalCount,totalPage,page,size);
+        return paginationDTO;
     }
 }

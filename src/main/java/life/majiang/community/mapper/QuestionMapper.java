@@ -14,6 +14,8 @@ public interface QuestionMapper {
     void create(Question question);
 
     //查询所有问题
-    List<Question> selectAllQuestion();
+    List<Question> selectAllQuestion(Integer offset, Integer size);
 
+    //查询数据条目
+    Integer count();
 }

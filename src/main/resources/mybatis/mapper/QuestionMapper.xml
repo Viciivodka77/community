@@ -8,8 +8,12 @@
         insert into community.question (title, description, gmtCreate, gmtModified, creator, commentCount, viewCount, likeCount, tag) value (#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{commentCount},#{viewCount},#{likeCount},#{tag})
     </insert>
 
-    <select id="selectAllQuestion" resultType="Question">
-        select * from community.question
+    <select id="selectAllQuestion" resultType="Question" parameterType="int">
+        select * from community.question limit #{offset},#{size}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(1) from community.question
     </select>
 
 </mapper>
