@@ -28,4 +28,6 @@ public interface QuestionMapper {
 
     //查询我的问题个数
     Integer countByUserId(Integer userId);
+
+    Question getQuestionById(Integer id);
 }

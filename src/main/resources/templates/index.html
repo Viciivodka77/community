@@ -24,7 +24,9 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading" th:text="${question.getTitle()}"></h4>
+                        <h4 class="media-heading" >
+                            <a th:text="${question.getTitle()}" th:href="@{/question/{questionId}(questionId = ${question.getId()})}"></a>
+                        </h4>
                         <span class="text-desc">•
                             <span th:text="${question.getUser().getName()}"></span>
                             发表了文章 •

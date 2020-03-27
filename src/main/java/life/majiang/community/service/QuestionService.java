@@ -98,4 +98,13 @@ public class QuestionService {
         paginationDTO.setPagination(totalCount,totalPage,page,size);
         return paginationDTO;
     }
+
+    public QuestionDTO getQuestionById(Integer id) {
+        Question question = questionMapper.getQuestionById(id);
+        User creator = userMapper.findById(question.getCreator());
+        QuestionDTO questionDTO = new QuestionDTO();
+        BeanUtils.copyProperties(question,questionDTO);
+        questionDTO.setUser(creator);
+        return questionDTO;
+    }
 }

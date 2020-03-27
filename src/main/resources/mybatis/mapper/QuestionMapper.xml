@@ -24,4 +24,8 @@
         select count(1) from community.question where creator = #{userId}
     </select>
 
+    <select id="getQuestionById" parameterType="int" resultType="Question">
+        select * from community.question where id = #{id}
+    </select>
+
 </mapper>
