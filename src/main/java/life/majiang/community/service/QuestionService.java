@@ -58,4 +58,44 @@ public class QuestionService {
         paginationDTO.setPagination(totalCount,totalPage,page,size);
         return paginationDTO;
     }
+
+    public PaginationDTO selectMyQuestion(Integer userId, Integer page, Integer size) {
+        //查询所有值数目
+        Integer totalCount = questionMapper.countByUserId(userId);
+        Integer totalPage;
+        //计算分页总数
+        if(totalCount == 0){
+            totalPage = 1;
+            page = 1;
+        } else if(totalCount % size == 0){
+            totalPage = totalCount / size;
+        }else {
+            totalPage = totalCount / size + 1;
+        }
+        //处理意外因素
+        if(page < 1){
+            page = 1;
+        }
+        if(page > totalPage){
+            page = totalPage;
+        }
+        //size * (page - 1) 计算数据库查询数值
+        Integer offset = size * (page - 1);
+        List<Question> questions = questionMapper.selectMyQuestion(userId,offset,size);
+
+        List<QuestionDTO> questionDTOList = new ArrayList<>();
+        PaginationDTO paginationDTO = new PaginationDTO();
+        for (Question question : questions) {
+            User userById = userMapper.findById(question.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(question,questionDTO);
+            //把Question封装到QuestionDTO
+            questionDTO.setUser(userById);
+            questionDTOList.add(questionDTO);
+        }
+        //把QuestionDTO封装到paginationDTO
+        paginationDTO.setQuestions(questionDTOList);
+        paginationDTO.setPagination(totalCount,totalPage,page,size);
+        return paginationDTO;
+    }
 }

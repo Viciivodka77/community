@@ -16,4 +16,12 @@
         select count(1) from community.question
     </select>
 
+    <select id="selectMyQuestion" resultType="Question" parameterType="int">
+        select * from community.question where creator = #{userId} limit #{offset},#{size}
+    </select>
+
+    <select id="countByUserId" resultType="int" parameterType="int">
+        select count(1) from community.question where creator = #{userId}
+    </select>
+
 </mapper>
