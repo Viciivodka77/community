@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>交流社区</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" >
+    <link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}">
+    <link rel="stylesheet" th:href="@{/css/community.css}">
+    <script th:src="@{/js/jquery-3.4.1.min.js}" type="application/javascript"></script>
+    <script th:src="@{/js/bootstrap.min.js}" type="application/javascript"></script>
+    <script th:src="@{/js/community.js}" type="application/javascript"></script>
+</head>
+<body>
+<div th:insert="common/common.html :: navbar"></div>
+    <div class="indexMain">
+        <div class="jumbotron">
+            <h1>出错了！！！</h1>
+            <p th:text="${msg == null ? '重新试试？' : msg }"></p>
+            <p><a class="btn btn-primary btn-lg" href="/" role="button">回到首页</a></p>
+            <div class="container">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
