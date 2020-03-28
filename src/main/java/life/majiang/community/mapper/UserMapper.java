@@ -15,4 +15,9 @@ public interface UserMapper {
 
     //根据id查询用户
     User findById(Integer id);
+
+    //根据accountId查询用户
+    User findByAccountId(String accountId);
+
+    void updateUser(User findUser);
 }

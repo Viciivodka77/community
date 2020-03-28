@@ -16,4 +16,12 @@
         select * from community.user where id = #{id}
     </select>
 
+    <select id="findByAccountId" resultType="User">
+        select * from community.user where accountId = #{accountId}
+    </select>
+
+    <update id="updateUser" parameterType="User">
+        update community.user set  name = #{name}, token = #{token}, gmtModified = #{gmtModified}, avatarUrl = #{avatarUrl}, bio = #{bio} where accountId = #{accountId}
+    </update>
+
 </mapper>
