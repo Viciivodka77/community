@@ -30,4 +30,6 @@ public interface QuestionMapper {
     Integer countByUserId(Integer userId);
 
     Question getQuestionById(Integer id);
+
+    void update(Question question);
 }
