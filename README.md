@@ -7,11 +7,7 @@ https://v3.bootcss.com/components/#navbar-default
 ##过程bug
 
 ###未解决
-出现java.net.SocketException: Connection reset 不抛出异常暂时解决 
 
-具体原因未知 判断1：可能重复使用方法没有关闭连接导致异常抛出
-
-更改了httputil类，暂时解决（观望）
 
 ###已解决
 
@@ -32,6 +28,9 @@ OkHttpClient client = getUnsafeOkHttpClient()
 .build();
 解决
 
+出现java.net.SocketException: 
+
+Connection reset 更改了httputil类，已解决
 
 ##工具
 SpringBoot2.2.5
@@ -48,20 +47,6 @@ Thymeleaf
 ```sql
 CREATE DATABASE `community` /*!40100 DEFAULT CHARACTER SET utf8 */
 
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `account_id` varchar(100) DEFAULT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  `token` varchar(36) DEFAULT NULL,
-  `gmt_create` bigint(20) DEFAULT NULL,
-  `gmt_modified` bigint(20) DEFAULT NULL,
-  `bio` varchar(256) DEFAULT NULL,
-  `avatar_url` varchar(256) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8
-
-
-
 create table question
 (
 	id int auto_increment,
@@ -76,6 +61,48 @@ create table question
 	tag varchar(256) null,
 	constraint question_pk
 		primary key (id)
+);
+
+create schema community collate utf8_general_ci;
+
+create table comment
+(
+	id bigint auto_increment
+		primary key,
+	parentId bigint not null,
+	type int not null,
+	commentator int not null,
+	gmtCreate bigint not null,
+	gmtModified bigint not null,
+	likeCount bigint default 0 null
+);
+
+create table question
+(
+	id int auto_increment
+		primary key,
+	title varchar(50) null,
+	description text null,
+	gmtCreate bigint null,
+	gmtModified bigint null,
+	creator int null,
+	commentCount int default 0 null,
+	viewCount int default 0 null,
+	likeCount int default 0 null,
+	tag varchar(256) null
+);
+
+create table user
+(
+	id int auto_increment
+		primary key,
+	accountId varchar(100) null,
+	name varchar(50) null,
+	token varchar(36) null,
+	gmtCreate bigint null,
+	gmtModified bigint null,
+	bio varchar(256) null,
+	avatarUrl varchar(256) null
 );
 
 
