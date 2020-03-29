@@ -32,4 +32,6 @@ public interface QuestionMapper {
     Question getQuestionById(Integer id);
 
     void update(Question question);
+
+    void updateView(Integer id);
 }

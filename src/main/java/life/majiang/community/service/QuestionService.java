@@ -126,4 +126,8 @@ public class QuestionService {
         }
 
     }
+
+    public void incView(Integer id) {
+        questionMapper.updateView(id);
+    }
 }
