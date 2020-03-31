@@ -14,7 +14,7 @@ public interface UserMapper {
     User findByToken(String token);
 
     //根据id查询用户
-    User findById(Integer id);
+    User findById(Long id);
 
     //根据accountId查询用户
     User findByAccountId(String accountId);

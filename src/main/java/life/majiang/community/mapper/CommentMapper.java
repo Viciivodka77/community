@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface CommentMapper {
 
     void insert(Comment comment);
+
+    Comment selectById(Long id);
 }

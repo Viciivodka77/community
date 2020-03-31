@@ -8,4 +8,8 @@
         insert into community.comment (parentId, type, commentator, gmtCreate, gmtModified, content) VALUE (#{parentId}, #{type}, #{commentator}, #{gmtCreate}, #{gmtModified}, #{content})
     </insert>
 
+    <select id="selectById" resultType="Comment">
+        select * from community.comment where id=#{id}
+    </select>
+
 </mapper>

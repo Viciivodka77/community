@@ -16,15 +16,15 @@
         select count(1) from community.question
     </select>
 
-    <select id="selectMyQuestion" resultType="Question" parameterType="int">
+    <select id="selectMyQuestion" resultType="Question">
         select * from community.question where creator = #{userId} limit #{offset},#{size}
     </select>
 
-    <select id="countByUserId" resultType="int" parameterType="int">
+    <select id="countByUserId" resultType="int">
         select count(1) from community.question where creator = #{userId}
     </select>
 
-    <select id="getQuestionById" parameterType="int" resultType="Question">
+    <select id="getQuestionById" resultType="Question">
         select * from community.question where id = #{id}
     </select>
 
@@ -32,8 +32,12 @@
         update community.question set title = #{title},description = #{description} , tag = #{tag} , gmtModified = #{gmtModified} where id = #{id}
     </update>
 
-    <update id="updateView" parameterType="int">
+    <update id="updateView">
         update community.question set viewCount = viewCount + 1 where id = #{id}
+    </update>
+
+    <update id="updateCommentCount">
+        update community.question set updateCommentCount = updateCommentCount + 1 where id = #{id}
     </update>
 
 </mapper>

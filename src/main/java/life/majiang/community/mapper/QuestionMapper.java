@@ -24,14 +24,16 @@ public interface QuestionMapper {
     //查询我的所有问题
 //    @Select("select * from community.question where creator = #{userId} limit #{offset},#{size}")
 //    List<Question> selectMyQuestion(@Param(value = "userId")Integer userId, @Param(value = "offset") Integer offset, @Param(value = "size") Integer size);
-    List<Question> selectMyQuestion(Integer userId, Integer offset, Integer size);
+    List<Question> selectMyQuestion(Long userId, Integer offset, Integer size);
 
     //查询我的问题个数
-    Integer countByUserId(Integer userId);
+    Integer countByUserId(Long userId);
 
-    Question getQuestionById(Integer id);
+    Question getQuestionById(Long id);
 
     void update(Question question);
 
-    void updateView(Integer id);
+    void updateView(Long id);
+
+    void updateCommentCount(Long id);
 }
