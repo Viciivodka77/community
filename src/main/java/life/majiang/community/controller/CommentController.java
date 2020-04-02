@@ -25,7 +25,7 @@ public class CommentController {
     private CommentService commentService;
 
     @ResponseBody
-    @RequestMapping(value = "/comment",method = RequestMethod.POST)
+    @RequestMapping(value = "/question/comment",method = RequestMethod.POST)
     public Object post(@RequestBody CommentDTO commentDTO,
                        HttpServletRequest request){
 

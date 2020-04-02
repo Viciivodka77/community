@@ -34,3 +34,10 @@ body{
     color: #999;
     margin-bottom: 30px;
 }
+.question-replay{
+    padding-top: 5px;
+}
+.question-btn{
+    float: right;
+    margin-right: 45px;
+}

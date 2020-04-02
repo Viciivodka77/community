@@ -36,8 +36,8 @@
         update community.question set viewCount = viewCount + 1 where id = #{id}
     </update>
 
-    <update id="updateCommentCount">
-        update community.question set updateCommentCount = updateCommentCount + 1 where id = #{id}
+    <update id="updateCommentCount" parameterType="Long">
+        update community.question set commentCount = commentCount + 1 where id = #{id}
     </update>
 
 </mapper>

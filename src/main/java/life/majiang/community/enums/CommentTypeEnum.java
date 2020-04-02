@@ -1,7 +1,7 @@
 package life.majiang.community.enums;
 
 public enum  CommentTypeEnum {
-    Question(1),
+    QUESTION(1),
     COMMENT(2);
     private Integer type;
 
@@ -17,8 +17,6 @@ public enum  CommentTypeEnum {
         for (CommentTypeEnum value : CommentTypeEnum.values()) {
             if (value.getType() == type){
                 return true;
-            }else {
-                return false;
             }
         }
         return false;
