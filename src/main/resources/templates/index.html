@@ -10,6 +10,17 @@
     <script th:src="@{js/bootstrap.min.js}" type="application/javascript"></script>
     <script th:src="@{js/community.js}" type="application/javascript"></script>
 </head>
+<script type="application/javascript">
+    window.onload = function () {
+        var closable = window.localStorage.getItem("closable");
+        if (closable == "true"){
+            window.localStorage.removeItem("closable");
+            window.close();
+        }
+
+    }
+</script>
+
 <body>
     <div th:insert="common/common.html :: navbar"></div>
     <div class="container-fluid indexMain img-thumbnail">
