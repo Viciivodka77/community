@@ -7,7 +7,9 @@ https://v3.bootcss.com/components/#navbar-default
 ##过程bug
 
 ###未解决
+出现java.net.SocketException: 
 
+Connection reset 更改了httputil类，(可能是网络问题)，偶尔发生，待解决
 
 ###已解决
 
@@ -28,9 +30,7 @@ OkHttpClient client = getUnsafeOkHttpClient()
 .build();
 解决
 
-出现java.net.SocketException: 
 
-Connection reset 更改了httputil类，已解决
 
 ##工具
 SpringBoot2.2.5

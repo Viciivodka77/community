@@ -41,3 +41,26 @@ body{
     float: right;
     margin-right: 45px;
 }
+.question-title{
+    margin-left: 11px;
+}
+.question-replayContent{
+    margin-left: 55px;
+    color: gray;
+}
+.menu{
+    color: #999;
+    margin-top: 10px;
+}
+.menu .icon{
+    margin-right: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.menu .icon:hover{
+    color: #499ef3;
+}
+.comments{
+    margin-bottom: 15px;
+}
