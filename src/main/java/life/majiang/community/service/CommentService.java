@@ -59,7 +59,7 @@ public class CommentService {
         }
     }
 
-    public List<CommentDTO> listByQuestionId(Long id) {
+    public List<CommentDTO> listByTargetId(Long id , CommentTypeEnum type) {
         List<Comment> comments  = commentMapper.selectAllCommentById(id);
         if(comments.size() == 0 ){
             return new ArrayList<>();
@@ -77,7 +77,7 @@ public class CommentService {
         }
         Map<Long, User> userMap = userList.stream().collect(Collectors.toMap(user -> user.getId(), user -> user));
 
-        //转换omment 为 CommentDTOsC
+        //转换Comment 为 CommentDTOsC
         List<CommentDTO> commentDTOs = comments.stream().map(comment -> {
             CommentDTO commentDTO = new CommentDTO();
             BeanUtils.copyProperties(comment,commentDTO);

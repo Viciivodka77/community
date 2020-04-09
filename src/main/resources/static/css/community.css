@@ -41,6 +41,7 @@ body{
     float: right;
     margin-right: 45px;
 }
+
 .question-title{
     margin-left: 11px;
 }
@@ -63,4 +64,14 @@ body{
 }
 .comments{
     margin-bottom: 15px;
+}
+.comments-comments{
+    margin-top: 15px;
+    border: 1px solid #eee;
+    padding-top: 10px;
+    border-radius: 5px;
+}
+.comments-btn{
+    float: right;
+    margin: 10px;
 }
