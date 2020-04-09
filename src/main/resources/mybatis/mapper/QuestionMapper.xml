@@ -9,7 +9,7 @@
     </insert>
 
     <select id="selectAllQuestion" resultType="Question" parameterType="int">
-        select * from community.question limit #{offset},#{size}
+        select * from community.question ORDER BY gmtCreate DESC limit #{offset},#{size}
     </select>
 
     <select id="count" resultType="int">
@@ -17,7 +17,7 @@
     </select>
 
     <select id="selectMyQuestion" resultType="Question">
-        select * from community.question where creator = #{userId} limit #{offset},#{size}
+        select * from community.question where creator = #{userId} ORDER BY gmtCreate DESC limit #{offset},#{size}
     </select>
 
     <select id="countByUserId" resultType="int">

@@ -13,7 +13,8 @@
     </select>
 
     <select id="selectAllCommentById" resultType="Comment">
-        select * from community.comment where parentId = #{id}
+        select * from community.comment where parentId = #{id} ORDER BY gmtCreate DESC
     </select>
+
 
 </mapper>
