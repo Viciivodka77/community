@@ -8,30 +8,55 @@ function post() {
 //展开二级回复
 function collapseComments(e) {
     var id = e.getAttribute("data-id");
-    var comments = $("comment-"+id);
+    var comments = $("#comment-"+id);
     var collapse = e.getAttribute("data-collapse");
-    comments.addClass("in");
+    if (collapse){
+        e.removeAttribute("data-collapse");
+    }else {
+        if(comments.children().length != 1){
+            e.setAttribute("data-collapse","in");
+        }else {
+            $.getJSON("/question/comment/"+id , function (data) {
+                $.each(data.data.reverse(),function (index , comment) {
 
-    $.getJSON("/comment/"+id , function (data) {
-        var commentBody = $("comment-body-"+id);
-        var items = [];
+                    var mediaLeftElement = $("<div/>",{
+                        "class" : "media-left"
+                    }).append($("<img/>", {
+                        "class" : "media-object indexAvatar",
+                        "src" : comment.user.avatarUrl
+                    }));
 
-        $.each(data.data,function (comment) {
-            var c = $("<div/>",{
-                "class":"col-lg-12 col-md-12 col-sm-12 col-xs-12 comments",
-                html: comment.content
+                    var mediaRightElement = $("<div/>",{
+                       "class" : "media-right"
+                    })
+                        .append($("<h5/>", {
+                            "class" : "media-middle question-replay",
+                            "html" : comment.user.name
+                    }))
+                        .append($("<div/>", {
+                            "html" : comment.content
+                    }))
+                        .append($("<div/>", {
+                            "class" : "menu"
+                    }))
+                        .append($("<span/>", {
+                            "class" : "pull-right",
+                            "html" : timeStamp2String(comment.gmtCreate)
+                    }));
+
+                    var mediaElement = $("<div/>",{
+                        "class" : "media"
+                    }).append(mediaLeftElement).append(mediaRightElement);
+                    var commentElement = $("<div/>",{
+                        "class":"col-lg-12 col-md-12 col-sm-12 col-xs-12 comments",
+                    }).append(mediaElement).append("<hr>");
+                    comments.prepend(commentElement);
+                });
+                e.setAttribute("data-collapse","in");
             });
-            items.push(c);
-        });
+        }
+    }
 
-
-        $("<div/>",{
-            "class":"col-lg-12 col-md-12 col-sm-12 col-xs-12 collapse comments-comments",
-            "id":"comment-"+id,
-            html: items.join("")
-        }).appendTo(commentBody);
-
-    });
 }
 
 function comment2target(targetId, type, content) {
@@ -75,3 +100,17 @@ function comment(e) {
     comment2target(commentId, 2, comment_content);
 }
 
+
+function timeStamp2String(time){
+    var datetime = new Date();
+    datetime.setTime(time);
+    var year = datetime.getFullYear();
+    var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+    var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+    // var hour = datetime.getHours()< 10 ? "0" + datetime.getHours() : datetime.getHours();
+    // var minute = datetime.getMinutes()< 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+    // var second = datetime.getSeconds()< 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+    return year + "年" + month + "月" + date + "日"
+        // +" "+hour+":"+minute+":"+second
+        ;
+}

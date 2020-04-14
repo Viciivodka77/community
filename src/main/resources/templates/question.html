@@ -58,25 +58,6 @@
                         </div>
                         <!-- 二级评论 -->
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 collapse comments-comments " th:id="${'comment-'+ commentDTO.getId() }" >
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comments" th:each="commentDTO : ${commentDTOList}">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="#">
-                                            <img class="media-object indexAvatar" th:src="${commentDTO.getUser().getAvatarUrl()}" />
-                                        </a>
-                                    </div>
-                                    <div class="media-right">
-                                        <h5 class="media-middle question-replay" th:text="${commentDTO.getUser().getName()}"></h5>
-                                        <div th:text="${commentDTO.getContent()}">
-                                        </div>
-                                        <!-- 操作 -->
-                                        <div class="menu">
-                                            <span class="text-right" th:text="${#dates.format(commentDTO.getGmtCreate(),'yyyy年MM月dd日')}"></span>
-                                        </div>
-                                        <hr>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <input type="text" class="form-control" placeholder="评论一下" th:id="${'input-'+ commentDTO.getId() }">
                                 <button type="button" class="btn btn-success comments-btn" onclick="comment(this)" th:data-id="${commentDTO.getId()}">评论</button>
