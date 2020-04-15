@@ -15,4 +15,6 @@ public interface CommentMapper {
     Comment selectById(Long id);
 
     List<Comment> selectAllCommentById(Long id);
+
+
 }

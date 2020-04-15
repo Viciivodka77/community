@@ -40,7 +40,11 @@ function collapseComments(e) {
                             "class" : "menu"
                     }))
                         .append($("<span/>", {
-                            "class" : "pull-right",
+                            "class": "glyphicon glyphicon-thumbs-up commentIcon",
+                            "aria-hidden": "true"
+                    }))
+                        .append($("<span/>", {
+                            "class" : "pull-right dateFormat",
                             "html" : timeStamp2String(comment.gmtCreate)
                     }));
 

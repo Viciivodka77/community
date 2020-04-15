@@ -40,4 +40,8 @@
         update community.question set commentCount = commentCount + 1 where id = #{id}
     </update>
 
+    <select id="selectRelated" parameterType="Question" resultType="Question">
+        select * from community.question where id != #{id} and tag REGEXP #{tag}
+    </select>
+
 </mapper>

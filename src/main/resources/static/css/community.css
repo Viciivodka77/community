@@ -2,7 +2,7 @@ body{
     background-color: #efefef;
 }
 .main{
-    margin: 60px;
+    margin: 60px 180px;
     background-color: whitesmoke;
 }
 .indexMain{
@@ -62,6 +62,22 @@ body{
 .menu .icon:hover{
     color: #499ef3;
 }
+.commentIcon{
+    margin-top: 5px;
+    color: #999;
+    margin-right: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.commentIcon:hover{
+    color: #499ef3;
+}
+.dateFormat{
+    margin-top: 4px;
+    float: right;
+    color: #999;
+}
 .comments{
     margin-bottom: 15px;
 }
@@ -74,4 +90,7 @@ body{
 .comments-btn{
     float: right;
     margin: 10px;
+}
+.question-tag{
+    margin-right: 5px;
 }

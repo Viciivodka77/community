@@ -36,4 +36,6 @@ public interface QuestionMapper {
     void updateView(Long id);
 
     void updateCommentCount(Long id);
+
+    List<Question> selectRelated(Question question);
 }

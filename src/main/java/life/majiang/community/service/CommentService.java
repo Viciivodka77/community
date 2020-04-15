@@ -77,7 +77,7 @@ public class CommentService {
         }
         Map<Long, User> userMap = userList.stream().collect(Collectors.toMap(user -> user.getId(), user -> user));
 
-        //转换Comment 为 CommentDTOsC
+        //转换Comment 为 CommentDTOs
         List<CommentDTO> commentDTOs = comments.stream().map(comment -> {
             CommentDTO commentDTO = new CommentDTO();
             BeanUtils.copyProperties(comment,commentDTO);
