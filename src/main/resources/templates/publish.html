@@ -32,19 +32,17 @@
                         <label for="tag">添加标签:</label>
                         <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签,以/号隔开" autocomplete="off" th:value="${tag}" onclick="showSelectTags()">
                         <div id="select-tag" class="publish-tag-tab">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">开发语言</a></li>
-                                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">平台框架</a></li>
+                            <ul class="nav nav-tabs publish-tag-nav" role="tablist">
+                                <li role="presentation" th:each="selectCategory : ${tags}">
+                                    <a th:href="${'#' + selectCategory.categoryName}" aria-controls="home" role="tab" data-toggle="tab" th:text="${selectCategory.categoryName}"></a>
+                                </li>
                             </ul>
 
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="home">
-                                    <span class=" label label-info " onclick="selectTag('Java')"><span class="glyphicon glyphicon-tags"></span>&nbsp;Java</span>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="profile">
-                                    <span class=" label label-info " onclick="selectTag('Spring')"><span class="glyphicon glyphicon-tags"></span>&nbsp;Spring</span>
-                                    <span class=" label label-info " onclick="selectTag('SpringMVC')"><span class="glyphicon glyphicon-tags"></span>&nbsp;SpringMVC</span>
-                                    <span class=" label label-info " onclick="selectTag('SpringBoot')"><span class="glyphicon glyphicon-tags"></span>&nbsp;SpringBoot</span>
+                                <div role="tabpanel" class="tab-pane publish-tag-label" th:id="${selectCategory.categoryName}" th:each="selectCategory : ${tags}">
+                                    <span class=" label label-info publish-tag-element " onclick="selectTag(this)" th:data-tag="${selectTag}" th:each="selectTag : ${selectCategory.tags}">
+                                        <span class="glyphicon glyphicon-tags publish-tag-glyphicon"></span><span th:text="${selectTag}"></span>
+                                    </span>
                                 </div>
                             </div>
 

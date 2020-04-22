@@ -11,6 +11,8 @@ https://v3.bootcss.com/components/#navbar-default
 
 Connection reset 更改了httputil类，(可能是网络问题)，偶尔发生，待解决
 
+查询回复时回复评论id和问题id重复，待解决（思考判断回复对象为问题还是评论）
+
 ###已解决
 
 okhttp 使用4.x.x 会出现出错误：
@@ -43,7 +45,9 @@ Mybatis
 
 Thymeleaf
 
+
 ##脚本
+（！！！！！！！待修改！！！！！！！）
 ```sql
 CREATE DATABASE `community` /*!40100 DEFAULT CHARACTER SET utf8 */
 

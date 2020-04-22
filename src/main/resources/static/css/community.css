@@ -99,3 +99,15 @@ body{
     margin-top: 10px;
     border: 1px solid silver;
 }
+.publish-tag-label{
+    padding: 10px;
+}
+.publish-tag-nav{
+    padding: 5px;
+}
+.publish-tag-element{
+    margin: 5px;
+}
+.publish-tag-glyphicon{
+    margin: 2px;
+}
